@@ -127,8 +127,10 @@ async function run() {
                 let url = columns[3];
                 console.log(`正在采集: ${i}.${name}`)
                 let expressInfo = await getExpressInfo(url);
+                let matchs = expressInfo.match(/(中通|圆通|申通|邮政|百世|韵达|天天|顺丰)/g);
+                expressInfo = (matchs || []).join(',');
                 console.log(`快递信息: ${expressInfo}`);
-                newLines.push(`${name},${url},${expressInfo.trim()}`);
+                newLines.push(`${name},${url},${expressInfo}`);
                 console.log('-------------------------------------------------');
             }
         }
